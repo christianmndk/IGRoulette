@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .main-content {
+            flex: 2;
+            padding: 20px;
+        }
+
+        .sidebar {
+            flex: 1;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-left: 1px solid #ddd;
+        }
+
+        .stats-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .stats-list li {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .user-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .user-list li {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .actions a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <h1>Admin Panel</h1>
+        <ul class="stats-list">
+            <li>Total Videos: {{ stats.total_videos }}</li>
+            <li>Hidden Videos: {{ stats.hidden_videos }}</li>
+            <li>Unique Visitors: {{ stats.unique_visitors_count }}</li>
+        </ul>
+
+        <div class="actions">
+            <a href="/admin/manage_hidden">Manage Hidden Videos</a>
+            <a href="/admin/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <h2>Active Users</h2>
+        <ul class="user-list">
+            {% for user in stats.unique_visitors_list %}
+            <li>{{ user }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+</body>
+</html>

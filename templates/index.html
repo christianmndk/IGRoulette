@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Gallery</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="gallery">
+        {% for thumbnail, video in videos.items() %}
+        <div class="video-card">
+            <img src="/static/saved_videos/{{ thumbnail }}" alt="Thumbnail" data-video="{{ video }}" onclick="showVideo('{{ video }}')">
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div id="overlay" class="hidden">
+        <div id="overlay-content">
+            <div class="video-display">
+                <video id="overlay-video" controls></video>
+            </div>
+            <div class="buttoms">
+                <div class="newbutton" onclick="queueRandom()">Queue Random</div>
+                <div class="newbutton" onclick="rateVideo()">Rate</div>
+                <div class="newbutton" onclick="shadowVideo()">Shadow</div>
+                <div class="newbutton" onclick="closeOverlay()">Close</div>
+            </div>
+
+        </div>
+    </div>
+    
+
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>

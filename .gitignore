@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.db
+env/
+static/saved_videos/*
+static/saved_videos/
+video_views_log.txt
+visit_log.txt
+
+*.txt
+*.jpg
+*.xz
+*.mp4
+

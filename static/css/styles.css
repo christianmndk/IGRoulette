@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust size as needed */
+    gap: 10px;
+    padding: 20px;
+}
+
+.video-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+.video_display{
+    display: inline-block;
+
+}
+.newbutton{
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 14px 24px;
+    border: none;
+    transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+    background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
+    color: #fff;
+    
+}
+.buttoms{
+    display: inline-block;
+    flex-direction: column;
+    gap:10px;
+}
+
+.video-card img {
+    width: 100%;
+    aspect-ratio: 9 / 16; /* Ensures the container is in a 9:16 aspect ratio */
+    object-fit: cover; /* Crops the image to fill the aspect ratio */
+    border-radius: 5px; /* Optional: Rounds edges for a polished look */
+}
+
+.video-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#overlay.hidden {
+    display: none;
+}
+
+#overlay-content {
+    background: rgb(44, 44, 44);
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#overlay-content video {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 5px;
+}

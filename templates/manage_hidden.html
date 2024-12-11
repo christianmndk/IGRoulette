@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Hidden Videos</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>Manage Hidden Videos</h1>
+    <form method="POST" action="/admin/manage_hidden">
+        <div class="gallery">
+            {% for video in hidden_videos %}
+            <div class="video-card">
+                <!-- Generate thumbnail filename from the video filename -->
+                <img src="/static/saved_videos/{{ video.replace('.mp4', '.jpg') }}" alt="Thumbnail">
+                <p>{{ video }}</p>
+                <button type="submit" name="restore_video" value="{{ video }}">Restore</button>
+            </div>
+            {% endfor %}
+        </div>
+    </form>
+
+
+    
+
+    <a href="/admin/panel">Back to Admin Panel</a>
+</body>
+</html>

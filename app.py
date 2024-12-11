@@ -5,7 +5,7 @@ import time
 import os
 
 app = Flask(__name__)
-
+    
 def get_or_set_visitor_id():
     visitor_id = request.cookies.get('visitor_id')
     if not visitor_id:
@@ -13,8 +13,11 @@ def get_or_set_visitor_id():
     return visitor_id
 
 def log_visit(visitor_id):
+    visitor_ip = request.remote_addr
+    user_agent = request.headers.get('User-Agent', 'Unknown')
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     with open('visit_log.txt', 'a') as log_file:
-        log_file.write(f"{visitor_id},{time.time()}\n")
+        log_file.write(f"{timestamp}, {visitor_ip}, {user_agent},{visitor_id},{time.time()}\n")
 
 app.secret_key = 'latex'  # Replace with a strong secret key
 
@@ -96,6 +99,7 @@ def log_video_view():
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     # Admin login
+
     if session.get('admin'):
         return redirect(url_for('admin_panel'))
 
@@ -125,22 +129,22 @@ def admin_panel():
             hidden_video_count = len(file.readlines())
 
     # Unique visitors
-    unique_visitors = set()
+    unique_visitors_list = set()
+    unique_ip_to_vist = set()
     admin_id = request.cookies.get('visitor_id')  # Get the current visitor ID
     if os.path.exists('visit_log.txt'):
         with open('visit_log.txt', 'r') as file:
-            unique_visitors = {line.split(',')[0] for line in file.readlines()}
+            lines = file.readlines()
+            unique_visitors_list = {"{} : {}".format(line.split(',')[3].strip(), line.split(',')[1].strip()) for line in lines}
 
-    # Add (admin) tag to the admin's identifier
-    unique_visitors_list = [
-        f"{user} (admin)" if user == admin_id else user for user in unique_visitors
-    ]
+
 
     stats = {
         'total_videos': video_count,
         'hidden_videos': hidden_video_count,
-        'unique_visitors_count': len(unique_visitors),
-        'unique_visitors_list': unique_visitors_list
+        'unique_visitors_count': len(unique_visitors_list),
+        'unique_visitors_list': unique_visitors_list,
+
     }
 
     return render_template('admin_panel.html', stats=stats)
